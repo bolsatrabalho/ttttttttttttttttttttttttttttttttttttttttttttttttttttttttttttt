@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Login – Frequência de Bolsistas</title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#f4f4f4;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  margin:0;
+}
+.login-container{
+  background:#fff;
+  padding:30px 40px;
+  border-radius:8px;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+  width:320px;
+}
+.login-container h2{
+  text-align:center;
+  margin-bottom:20px;
+  color:#333;
+}
+.login-container input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border:1px solid #ccc;
+  border-radius:4px;
+  box-sizing:border-box;
+}
+.login-container button{
+  width:100%;
+  padding:10px;
+  margin-top:15px;
+  border:none;
+  border-radius:4px;
+  background:#4CAF50;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+}
+.login-container button:hover{
+  background:#45a049;
+}
+.error{
+  color:red;
+  text-align:center;
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+  <h2>Frequência Bolsistas</h2>
+
+  <input
+    type="email"
+    id="email"
+    placeholder="E-mail institucional"
+    required
+  >
+
+  <input
+    type="password"
+    id="senha"
+    placeholder="Senha"
+    required
+  >
+
+  <button onclick="login()">Entrar</button>
+
+  <div class="error" id="erroLogin"></div>
+</div>
+
+<script>
+// ================= CONFIGURAÇÃO =================
+const SENHA_GERAL = "teste1204";
+
+// ================= LOGIN =================
+function login(){
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const senha = document.getElementById("senha").value.trim();
+  const erro  = document.getElementById("erroLogin");
+
+  erro.innerText = "";
+
+  // valida email institucional (termina com uespi.br)
+  if(!email || !email.endsWith("uespi.br")){
+    erro.innerText = "Use um e-mail institucional válido (uespi.br)";
+    return;
+  }
+
+  // valida senha
+  if(senha !== SENHA_GERAL){
+    erro.innerText = "Senha incorreta";
+    return;
+  }
+
+  // redireciona passando o email pela URL
+  window.location.href =
+    "tabela.html?email=" + encodeURIComponent(email);
+}
+</script>
+
+</body>
+</html>
